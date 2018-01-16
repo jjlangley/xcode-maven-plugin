@@ -71,6 +71,12 @@ public abstract class BuildContextAwareMojo extends AbstractXCodeMojo
    */
   protected String provisioningProfile;
 
+    /**
+     * Can be used to set the development team defined in the Xcode project target. You can
+     * set it to an empty String if you want to use the default development team.
+     */
+  protected String developmentTeam;
+
   /**
    * The Xcode target to be built. If not specified, the default target (the first target) will be
    * built.
@@ -132,6 +138,9 @@ public abstract class BuildContextAwareMojo extends AbstractXCodeMojo
 
     if (provisioningProfile != null)
       managedSettings.put(Settings.ManagedSetting.PROVISIONING_PROFILE.name(), provisioningProfile);
+
+    if (developmentTeam != null)
+        managedSettings.put(Settings.ManagedSetting.DEVELOPMENT_TEAM.name(), developmentTeam);
 
     HashMap<String, String> managedOptions = new HashMap<String, String>();
 

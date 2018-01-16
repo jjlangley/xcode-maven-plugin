@@ -136,6 +136,11 @@ public class XCodeContext implements IXCodeContext
     return getSettings().getAllSettings().get(Settings.ManagedSetting.PROVISIONING_PROFILE.name());
   }
 
+  public String getDevelopmentTeam()
+  {
+      return getSettings().getAllSettings().get(Settings.ManagedSetting.DEVELOPMENT_TEAM.name());
+  }
+
   public String getTarget()
   {
     return getOptions().getAllOptions().get(Options.ManagedOption.TARGET.getOptionName());
