@@ -74,6 +74,9 @@ public abstract class BuildContextAwareMojo extends AbstractXCodeMojo
     /**
      * Can be used to set the development team defined in the Xcode project target. You can
      * set it to an empty String if you want to use the default development team.
+     *
+     * @parameter expression="${xcode.developmentTeam}"
+     * @since 1.2.1
      */
   protected String developmentTeam;
 

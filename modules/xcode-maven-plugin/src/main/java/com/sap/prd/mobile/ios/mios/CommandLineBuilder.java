@@ -39,6 +39,7 @@ class CommandLineBuilder
   {
     List<String> result = new ArrayList<String>();
     result.add(XCODEBUILD);
+      result.add("-allowProvisioningUpdates");
     appendOptions(xcodeContext, result);
     for (String buildAction : xcodeContext.getBuildActions()) {
       appendValue(result, buildAction);
