@@ -25,11 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -109,7 +105,7 @@ public class EffectiveBuildSettings implements IEffectiveBuildSettings
       out = new PrintStream(os, true, Charset.defaultCharset().name());
 
       final int returnValue = Forker.forkProcess(out, context.getProjectRootDirectory(),
-            cmdLineBuilder.createBuildCall());
+            removeAutoProvisionOption(cmdLineBuilder.createBuildCall()));
 
       if (returnValue != 0) {
         if (out != null)
@@ -131,4 +127,22 @@ public class EffectiveBuildSettings implements IEffectiveBuildSettings
       IOUtils.closeQuietly(out);
     }
   }
+
+    private static String[] removeAutoProvisionOption(String[] buildCall) {
+
+        List<String> arguments = new LinkedList<String>(Arrays.asList(buildCall));
+        int foundIndex = arguments.indexOf("-allowProvisioningUpdates");
+        if (foundIndex > 0)
+        {
+            arguments.remove(foundIndex);
+        }
+
+        String[] returnValue = new String[arguments.size()];
+
+        for (int i = 0; i < arguments.size(); ++i) {
+            returnValue[i] = arguments.get(i);
+        }
+
+        return returnValue;
+    }
 }
